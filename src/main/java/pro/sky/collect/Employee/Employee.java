@@ -1,15 +1,43 @@
-package pro.sky.collect;
+package pro.sky.collect.Employee;
 
 import java.util.Objects;
 
 public class Employee {
     private String name;
     private String lastName;
+    private int unit;
+    private double salary;
 
 
-    public Employee(String name, String lastName) {
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public int getUnit() {
+        return unit;
+    }
+
+    public void setUnit(int unit) {
+        this.unit = unit;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    public Employee(String name, String lastName, int unit, double salary) {
         this.name = name;
         this.lastName = lastName;
+        this.unit = unit;
+        this.salary = salary;
     }
 
     public String getName() {
@@ -19,6 +47,7 @@ public class Employee {
     public String getLastName() {
         return lastName;
     }
+
     @Override
     public boolean equals(Object o) {
 
