@@ -1,11 +1,13 @@
 package pro.sky.collect.Employee;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import pro.sky.collect.Exception.AddExceptionBadReques;
 import pro.sky.collect.Exception.BadParamsException;
 
 import java.util.HashMap;
@@ -30,6 +32,9 @@ public class EmployeeController {
         if ((name == null) || (lastName == null)) {
             throw new BadParamsException();
         }
+        if ((!StringUtils.isAlpha(name) || (!StringUtils.isAlpha(lastName))))
+            throw new AddExceptionBadReques();
+
         return employeeService.find(name, lastName);
     }
 
@@ -38,6 +43,8 @@ public class EmployeeController {
         if ((name == null) || (lastName == null)) {
             throw new BadParamsException();
         }
+        if ((!StringUtils.isAlpha(name) || (!StringUtils.isAlpha(lastName))))
+            throw new AddExceptionBadReques();
         return employeeService.remove(name, lastName);
     }
 
@@ -47,7 +54,13 @@ public class EmployeeController {
         if ((name == null) || (lastName == null)) {
             throw new BadParamsException();
         }
-        return employeeService.add(name, lastName, unit, salary);
+        if ((!StringUtils.isAlpha(name) || (!StringUtils.isAlpha(lastName)))) {
+            throw new AddExceptionBadReques();
+        }
+        String sname = StringUtils.capitalize(name);
+        String slastName =  StringUtils.capitalize(lastName);
+
+        return employeeService.add(sname, slastName, unit, salary);
     }
 
     @GetMapping(path = "/list")
