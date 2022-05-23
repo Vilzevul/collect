@@ -13,11 +13,11 @@ import java.util.OptionalDouble;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
     List<Employee> employee = new ArrayList<>(List.of(
-            new Employee("Lex", "Lutor", 1, 1200),
-            new Employee("Clark", "Kent", 1, 2500),
-            new Employee("Lois", "Laine", 2, 900),
-            new Employee("Oliver", "Queen", 2, 500),
-            new Employee("Viktor", "Stone", 3, 3000)
+            new Employee("Lex", "Lutor", 1, 10),
+            new Employee("Clark", "Kent", 1, 20),
+            new Employee("Lois", "Laine", 2, 10),
+            new Employee("Oliver", "Queen", 2, 50),
+            new Employee("Viktor", "Stone", 3, 30)
     ));
 
     public HashMap<String, Employee> mapEmploye = new HashMap<>();
