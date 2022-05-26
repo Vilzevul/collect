@@ -10,6 +10,7 @@ import pro.sky.collect.Employee.EmployeeService;
 import pro.sky.collect.Employee.EmployeeServiceImpl;
 import pro.sky.collect.Employee.EmployeeServiceImplTest;
 import pro.sky.collect.Employee.Employee;
+import pro.sky.collect.Exception.BadParamsException;
 
 import java.util.*;
 
@@ -18,13 +19,19 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class DepartServiceImplTest {
+final String NAME1 = "Clark";
+final String NAME2 = "Lex";
+final String LASTNAME1 = "Kent";
+final String LASTNAME2 = "Lutor";
+final int MAXSALARY = 20;
+final int MINSALARY = 10;
 
-    Employee result = new Employee("Clark", "Kent", 1, 20);
-    Employee result2 = new Employee("Lex", "Lutor", 1, 10);
+    final Employee RESULT = new Employee(NAME1, LASTNAME1, 1, MAXSALARY);
+    final Employee RESULT2 = new Employee(NAME2, LASTNAME2, 1, MINSALARY);
 
     List<Employee> collectResult = new ArrayList<>(List.of(
-            new Employee("Lex", "Lutor", 1, 10),
-            new Employee("Clark", "Kent", 1, 20)));
+            new Employee(NAME2, LASTNAME2, 1, MINSALARY),
+            new Employee(NAME1, LASTNAME1, 1, MAXSALARY)));
 
     HashMap<String, Employee> map = new HashMap<>();
 
@@ -43,14 +50,26 @@ public class DepartServiceImplTest {
     @Test
     public void testMax() {
         when( (employeeService.mapEmployee())).thenReturn( map);
-        assertEquals(result, out.departMaxSalary(1));
+        assertEquals(RESULT, out.departMaxSalary(1));
+    }
+    @Test
+    public void testMaxThrows() {
+        when( (employeeService.mapEmployee())).thenReturn( map);
+        assertThrows(BadParamsException.class,()->out.departMaxSalary(10) );
     }
 
     @Test
     public void testMin() {
         when( (employeeService.mapEmployee())).thenReturn( map);
-        assertEquals(result2, out.departMinSalary(1));
+        assertEquals(RESULT2, out.departMinSalary(1));
+            }
+    @Test
+    public void testMinThrows() {
+        when( (employeeService.mapEmployee())).thenReturn( map);
+        assertThrows(BadParamsException.class,()->out.departMinSalary(10) );
     }
+
+
     @Test
     public void testDepartSalary() {
         when( (employeeService.mapEmployee())).thenReturn( map);
@@ -59,7 +78,7 @@ public class DepartServiceImplTest {
     @Test
     public void testDepartAllSalary() {
         when( (employeeService.mapEmployee())).thenReturn( map);
-        assertEquals(map, out.departAllSalary());
+        assertNotNull(out.departAllSalary());
     }
 
 

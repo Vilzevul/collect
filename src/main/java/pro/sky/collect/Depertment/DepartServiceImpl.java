@@ -3,6 +3,7 @@ package pro.sky.collect.Depertment;
 import org.springframework.stereotype.Service;
 import pro.sky.collect.Employee.Employee;
 import pro.sky.collect.Employee.EmployeeService;
+import pro.sky.collect.Exception.BadParamsException;
 
 import java.util.Comparator;
 import java.util.List;
@@ -23,7 +24,8 @@ public class DepartServiceImpl implements DepartService {
     public Employee departMaxSalary(int depart) {
         Employee employee = employeeService.mapEmployee().values().stream()
                 .filter(v -> v.getUnit() == depart)
-                .max(Comparator.comparingDouble(Employee::getSalary)).get();
+                .max(Comparator.comparingDouble(Employee::getSalary))
+                .orElseThrow(BadParamsException::new);;
         return employee;
     }
 
@@ -32,7 +34,9 @@ public class DepartServiceImpl implements DepartService {
     public Employee departMinSalary(int depart) {
         Employee employee = employeeService.mapEmployee().values().stream()
                 .filter(v -> v.getUnit() == depart)
-                .min(Comparator.comparingDouble(Employee::getSalary)).get();
+ //               .min(Comparator.comparingDouble(Employee::getSalary)).get()
+                .min(Comparator.comparingDouble(Employee::getSalary))
+                .orElseThrow(BadParamsException::new);
         return employee;
 
     }
