@@ -51,9 +51,10 @@ public class DepartServiceImpl implements DepartService {
     }
 
     @Override
-    public Map<Integer, List<Map.Entry<String, Employee>>> departAllSalary() {
-        return employeeService.mapEmployee().entrySet().stream()
-                .collect(Collectors.groupingBy(x -> x.getValue().getUnit()));
+    public Map<Integer, List< Employee>> departAllSalary() {
+        return employeeService.mapEmployee().values().stream()
+ //               .collect(Collectors.groupingBy(x -> x.getValue().getUnit()));
+                .collect(Collectors.groupingBy(Employee::getUnit));
 
     }
 

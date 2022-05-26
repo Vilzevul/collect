@@ -21,7 +21,7 @@ import java.util.OptionalDouble;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class EmployeeServiceImplTest {
-    EmployeeServiceImpl out = new EmployeeServiceImpl();
+    private final EmployeeServiceImpl out = new EmployeeServiceImpl();
 
     @BeforeEach
     public void initTest() {
@@ -46,19 +46,13 @@ public class EmployeeServiceImplTest {
     public void testRemove() {
         Employee result = out.find("Clark", "Kent");
         assertEquals(result, out.remove("Clark", "Kent"));
+        assertThrows(RemoveException.class, () -> out.remove("name", "lastName"));
     }
 
     @Test
-    public void testRemoveContains() {
-        if (!out.mapEmployee().containsKey("name" + "lastName"))
-            assertThrows(RemoveException.class, () -> out.remove("name", "lastName"));
-
-    }
-
-    @Test
-    public void testAdd() throws Exception {
-        Employee result = new Employee("Name11", "Last11", 1, 10);
-        assertFalse(out.mapEmployee().containsKey(result.getName() + result.getLastName()));
+    public void testAdd() {
+        Employee result = out.add("Name11", "Last11", 1, 10);
+        assertTrue(out.mapEmployee().containsKey(result.getName() + result.getLastName()));
 
         assertThrows(AddExceptionBadReques.class, () -> out.add("Clark", "Kent", 1, 10));
     }

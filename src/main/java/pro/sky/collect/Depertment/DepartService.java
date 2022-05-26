@@ -14,5 +14,5 @@ public interface DepartService {
 
     Map<String, Employee> departSalary(int depart);
 
-    Map<Integer, List<Map.Entry<String, Employee>>> departAllSalary();
+    Map<Integer, List< Employee>> departAllSalary();
 }

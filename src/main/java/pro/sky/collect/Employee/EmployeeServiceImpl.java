@@ -13,8 +13,8 @@ import java.util.OptionalDouble;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
     List<Employee> employee = new ArrayList<>(List.of(
-            new Employee("Lex", "Lutor", 1, 10),
             new Employee("Clark", "Kent", 1, 20),
+            new Employee("Lex", "Lutor", 1, 10),
             new Employee("Lois", "Laine", 2, 10),
             new Employee("Oliver", "Queen", 2, 50),
             new Employee("Viktor", "Stone", 3, 30)
