@@ -38,7 +38,7 @@ public class DepartController {
     }
 
     @GetMapping(path = "/all")
-    public Map<Integer, List<Map.Entry<String, Employee>>> departAllSalary() {
+    public Map<Integer, List< Employee>> departAllSalary() {
         return departService.departAllSalary();
     }
 
